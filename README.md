@@ -1,3 +1,121 @@
+# Doctoc Clinic Portal (Next.js)
+
+Portal web completo para la gestión de citas médicas online utilizando las APIs de Doctoc.
+
+## 🚀 Características
+
+- ✅ Landing page de clínicas con información, sedes y especialidades
+- ✅ Búsqueda de doctores por especialidad
+- ✅ Visualización de horarios con manejo correcto de zona horaria
+- ✅ Sistema de overbooking configurable (máx 2 citas simultáneas)
+- ✅ Agendamiento de citas con validaciones
+- ✅ Dashboard del paciente (ver, reagendar, cancelar citas)
+- ✅ Autenticación con Firebase Auth
+- ✅ Clean Architecture con separación de responsabilidades
+
+## 📋 Requisitos
+
+- Node.js 18+
+- Next.js 16+
+- npm o yarn
+
+## 🔧 Instalación
+
+```bash
+npm install
+```
+
+## ⚙️ Variables de Entorno
+
+Crea un archivo `.env.local` en la raíz del proyecto:
+
+```env
+NEXT_PUBLIC_DOCTOC_TOKEN=tu_token_aqui
+NEXT_PUBLIC_TZ=America/Lima
+NEXT_PUBLIC_FIREBASE_API_KEY=tu_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=tu_auth_domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=tu_project_id
+```
+
+## 🏃 Scripts
+
+- `npm run dev` - Inicia el servidor de desarrollo
+- `npm run build` - Construye la aplicación para producción
+- `npm run start` - Inicia el servidor de producción
+- `npm test` - Ejecuta los tests
+- `npm run lint` - Ejecuta el linter
+
+## 📍 Rutas Principales
+
+### Públicas
+- `/` - Página principal
+- `/clinic/[orgId]` - Landing de clínica (SSR)
+- `/clinic/[orgId]/search` - Búsqueda de doctores
+- `/clinic/[orgId]/doctor/[uid]` - Detalle del doctor y disponibilidad
+- `/clinic/[orgId]/doctor/[uid]/book` - Agendamiento de cita
+
+### Autenticadas
+- `/login` - Iniciar sesión
+- `/register` - Registrarse
+- `/logout` - Cerrar sesión
+- `/patient` - Dashboard del paciente
+
+## 🏗️ Arquitectura
+
+El proyecto sigue **Clean Architecture** con las siguientes capas:
+
+```
+src/
+├── app/              # Next.js App Router (rutas y layouts)
+├── core/             # Capa de dominio
+│   ├── domain/       # Entidades y repositorios (interfaces)
+│   └── application/  # Servicios y casos de uso
+├── infrastructure/   # Implementaciones externas
+│   └── api/          # Cliente HTTP y APIs de Doctoc
+├── presentation/      # UI y componentes
+│   └── components/   # Componentes reutilizables
+├── auth/             # Configuración de Firebase Auth
+└── config/           # Constantes y configuración
+```
+
+## 🧪 Testing
+
+El proyecto incluye configuración de Jest y Testing Library. Ejecuta:
+
+```bash
+npm test
+```
+
+## 📚 Documentación
+
+- `docs/API.md` - Documentación de APIs utilizadas
+- `docs/COMPONENTES.md` - Componentes reutilizables
+- `docs/PROCESO.md` - Decisiones técnicas y proceso
+
+## ⚠️ Notas Importantes
+
+### Zona Horaria
+El sistema maneja correctamente las zonas horarias usando `date-fns-tz`. Por defecto usa `America/Lima`, pero se puede configurar por organización.
+
+### Overbooking
+- Si está activado: permite hasta 2 citas simultáneas en el mismo horario
+- Si está desactivado: bloquea horarios con solapamiento
+- La configuración se lee del `calendarInfo` del doctor
+
+## 🛠️ Tecnologías
+
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS
+- Firebase Auth
+- date-fns / date-fns-tz
+- Jest + Testing Library
+
+## 📝 Licencia
+
+Este proyecto es privado.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
